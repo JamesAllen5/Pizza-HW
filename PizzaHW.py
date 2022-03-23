@@ -9,6 +9,8 @@ class MyGUI:
         self.main_window.geometry("500x200")
 
         self.top_frame = tkinter.Frame(self.main_window)
+        self.tm_frame = tkinter.Frame(self.main_window)
+        self.bm_frame = tkinter.Frame(self.main_window)
         self.bottom_frame = tkinter.Frame(self.main_window)
 
         self.prompt_label = tkinter.Label(self.top_frame, text="Enter your name:")
@@ -18,10 +20,12 @@ class MyGUI:
         self.prompt_label.pack(side="left")
         self.name_entry.pack(side="left")
         self.top_frame.pack(side="top")
+        self.tm_frame.pack(side="top")
+        self.bm_frame.pack(side="top")
         self.bottom_frame.pack(side="top")
 
         self.orderbutton = tkinter.Button(
-            self.main_window, text="Place Order", command=self.convert
+            self.main_window, text="Place Order", command=self.calculate
         )
 
         self.quit_button = tkinter.Button(
@@ -36,22 +40,28 @@ class MyGUI:
         self.radio_var.set(0)
 
         self.rb1 = tkinter.Radiobutton(
-            self.top_frame, text="Thin Crust", variable=self.radio_var, value=10
+            self.tm_frame, text="Thin Crust", variable=self.radio_var, value=-2
         )
 
         self.rb2 = tkinter.Radiobutton(
-            self.top_frame, text="Original Crust", variable=self.radio_var, value=13
+            self.tm_frame, text="Original Crust", variable=self.radio_var, value=+0
         )
 
         self.rb3 = tkinter.Radiobutton(
-            self.top_frame, text="Stuffed Crust", variable=self.radio_var, value=15
+            self.tm_frame, text="Stuffed Crust", variable=self.radio_var, value=+5
         )
 
         self.rb2.select()
 
-        self.rb1.pack()
-        self.rb2.pack()
-        self.rb3.pack()
+        self.rb1.pack(side="left")
+        self.rb2.pack(side="left")
+        self.rb3.pack(side="left")
+
+        self.cb_var1 = tkinter.IntVar()
+        self.cb_var2 = tkinter.IntVar()
+        self.cb_var3 = tkinter.IntVar()
+        self.cb_var4 = tkinter.IntVar()
+        self.cb_var5 = tkinter.IntVar()
 
         self.cb_var1.set(0)
         self.cb_var2.set(0)
@@ -60,36 +70,36 @@ class MyGUI:
         self.cb_var5.set(0)
 
         self.cb1 = tkinter.Checkbutton(
-            self.top_frame, text="Pepperoni", variable=self.cb_var1
+            self.bm_frame, text="Pepperoni", variable=self.cb_var1
         )
 
         self.cb2 = tkinter.Checkbutton(
-            self.top_frame, text="Sausage", variable=self.cb_var2
+            self.bm_frame, text="Sausage", variable=self.cb_var2
         )
 
         self.cb3 = tkinter.Checkbutton(
-            self.top_frame, text="Banana Peppers", variable=self.cb_var3
+            self.bm_frame, text="Banana Peppers", variable=self.cb_var3
         )
 
         self.cb4 = tkinter.Checkbutton(
-            self.top_frame, text="Olives", variable=self.cb_var4
+            self.bm_frame, text="Olives", variable=self.cb_var4
         )
 
         self.cb5 = tkinter.Checkbutton(
-            self.top_frame, text="Pineapple", variable=self.cb_var5
+            self.bm_frame, text="Pineapple", variable=self.cb_var5
         )
 
-        self.cb1.pack()
-        self.cb2.pack()
-        self.cb3.pack()
-        self.cb4.pack()
-        self.cb5.pack()
-
-        total = 0
+        self.cb1.pack(side="left")
+        self.cb2.pack(side="left")
+        self.cb3.pack(side="left")
+        self.cb4.pack(side="left")
+        self.cb5.pack(side="left")
 
         tkinter.mainloop()
 
     def calculate(self):
+        total = float(self.radio_var.get())
+
         if self.cb_var1.get() == 1:
             total += 1
         if self.cb_var2.get() == 1:
@@ -101,13 +111,10 @@ class MyGUI:
         if self.cb_var5.get() == 1:
             total += 4
 
-    def convert(self):
-        cost = float(self.kilo_entry.get())
-
-        miles = round(cost * 0.6214, 2)
+        name = self.name_entry.get()
 
         tkinter.messagebox.showinfo(
-            "Price", str(cost) + "kilometers is equal to " + str(miles) + " miles."
+            str(name) + "'s pizza will cost $" + str(total) + "."
         )
 
 
