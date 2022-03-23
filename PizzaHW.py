@@ -8,12 +8,15 @@ class MyGUI:
 
         self.main_window.geometry("500x200")
 
+        self.main_window.configure(bg='yellow')
+
         self.top_frame = tkinter.Frame(self.main_window)
         self.tm_frame = tkinter.Frame(self.main_window)
         self.bm_frame = tkinter.Frame(self.main_window)
         self.bottom_frame = tkinter.Frame(self.main_window)
 
         self.prompt_label = tkinter.Label(self.top_frame, text="Enter your name:")
+        self.prompt_label.configure(bg='red')
 
         self.name_entry = tkinter.Entry(self.top_frame, width=10)
 
@@ -40,16 +43,20 @@ class MyGUI:
         self.radio_var.set(0)
 
         self.rb1 = tkinter.Radiobutton(
-            self.tm_frame, text="Thin Crust", variable=self.radio_var, value=-2
+            self.tm_frame, text="Thin Crust", variable=self.radio_var, value=8
         )
+        self.rb1.configure(bg='green')
+
 
         self.rb2 = tkinter.Radiobutton(
-            self.tm_frame, text="Original Crust", variable=self.radio_var, value=+0
+            self.tm_frame, text="Original Crust", variable=self.radio_var, value=10
         )
+        self.rb2.configure(bg='green')
 
         self.rb3 = tkinter.Radiobutton(
-            self.tm_frame, text="Stuffed Crust", variable=self.radio_var, value=+5
+            self.tm_frame, text="Stuffed Crust", variable=self.radio_var, value=15
         )
+        self.rb3.configure(bg='green')
 
         self.rb2.select()
 
@@ -72,22 +79,27 @@ class MyGUI:
         self.cb1 = tkinter.Checkbutton(
             self.bm_frame, text="Pepperoni", variable=self.cb_var1
         )
+        self.cb1.configure(bg='magenta')
 
         self.cb2 = tkinter.Checkbutton(
             self.bm_frame, text="Sausage", variable=self.cb_var2
         )
+        self.cb2.configure(bg='magenta')
 
         self.cb3 = tkinter.Checkbutton(
             self.bm_frame, text="Banana Peppers", variable=self.cb_var3
         )
+        self.cb3.configure(bg='magenta')
 
         self.cb4 = tkinter.Checkbutton(
             self.bm_frame, text="Olives", variable=self.cb_var4
         )
+        self.cb4.configure(bg='magenta')
 
         self.cb5 = tkinter.Checkbutton(
             self.bm_frame, text="Pineapple", variable=self.cb_var5
         )
+        self.cb5.configure(bg='magenta')
 
         self.cb1.pack(side="left")
         self.cb2.pack(side="left")
@@ -111,10 +123,11 @@ class MyGUI:
         if self.cb_var5.get() == 1:
             total += 4
 
-        name = self.name_entry.get()
+        money = "${:,.2f}".format(total)
+        customer = self.name_entry.get()
 
         tkinter.messagebox.showinfo(
-            str(name) + "'s pizza will cost $" + str(total) + "."
+            "Checkout",str(customer) + "'s pizza will cost " + str(money)
         )
 
 
